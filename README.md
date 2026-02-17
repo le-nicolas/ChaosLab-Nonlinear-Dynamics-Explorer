@@ -6,6 +6,16 @@ Chaos Theory Lab is an end-to-end toolkit for exploring nonlinear dynamics:
 - Estimate Lyapunov exponents and permutation entropy.
 - Run from CLI or a browser-based dashboard.
 
+## Sample result
+
+Generated from:
+
+```bash
+chaoslab simulate --system lorenz --duration 30 --dt 0.01
+```
+
+![Chaos Theory Lab sample output](docs/chaoslab-preview.png)
+
 ## Why this is useful
 
 Chaos is not only visual. This project combines simulation and measurable diagnostics so you can:
