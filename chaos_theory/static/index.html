@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chaos Theory Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/styles.css" />
+    <script defer src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script defer src="/static/app.js"></script>
+  </head>
+  <body>
+    <div class="background-grid"></div>
+    <main class="page">
+      <section class="hero">
+        <p class="eyebrow">Chaos Theory Lab</p>
+        <h1>Simulate, compare, and measure nonlinear systems.</h1>
+        <p class="subtitle">
+          Explore Lorenz, Rossler, and logistic dynamics. Estimate Lyapunov exponents and entropy from generated
+          trajectories or your own CSV data.
+        </p>
+      </section>
+
+      <section class="panel">
+        <h2>Simulation</h2>
+        <form id="simulation-form" class="form-grid">
+          <label>
+            System
+            <select id="system" name="system">
+              <option value="lorenz">Lorenz</option>
+              <option value="rossler">Rossler</option>
+              <option value="logistic">Logistic map</option>
+            </select>
+          </label>
+
+          <label id="duration-wrapper">
+            Duration
+            <input id="duration" name="duration" type="number" value="30" min="1" step="1" />
+          </label>
+
+          <label id="dt-wrapper">
+            dt
+            <input id="dt" name="dt" type="number" value="0.01" min="0.0001" step="0.001" />
+          </label>
+
+          <label id="steps-wrapper" class="hidden">
+            Steps
+            <input id="steps" name="steps" type="number" value="2500" min="100" step="100" />
+          </label>
+
+          <label id="x0-wrapper" class="hidden">
+            x0
+            <input id="x0" name="x0" type="number" value="0.2" min="0.000001" max="0.999999" step="0.01" />
+          </label>
+
+          <label>
+            Perturbation
+            <input id="perturbation" name="perturbation" type="number" value="1e-8" min="1e-12" step="1e-8" />
+          </label>
+
+          <button class="btn" type="submit">Run Simulation</button>
+        </form>
+      </section>
+
+      <section class="metrics-row">
+        <article class="metric-card">
+          <span>Pair Lyapunov</span>
+          <strong id="pair-lyapunov">-</strong>
+        </article>
+        <article class="metric-card">
+          <span>Series Lyapunov</span>
+          <strong id="series-lyapunov">-</strong>
+        </article>
+        <article class="metric-card">
+          <span>Permutation Entropy</span>
+          <strong id="entropy">-</strong>
+        </article>
+        <article class="metric-card">
+          <span>Classification</span>
+          <strong id="classification">-</strong>
+        </article>
+      </section>
+
+      <section class="panel">
+        <h2>Trajectory</h2>
+        <div id="trajectory-plot" class="plot"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Divergence</h2>
+        <div id="divergence-plot" class="plot"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Analyze CSV</h2>
+        <form id="analyze-form" class="analyze-form">
+          <label>
+            CSV file
+            <input type="file" id="csv-file" accept=".csv" required />
+          </label>
+          <label>
+            Column (optional)
+            <input type="text" id="csv-column" placeholder="value" />
+          </label>
+          <button class="btn" type="submit">Analyze File</button>
+        </form>
+        <pre id="analyze-output" class="analyze-output">No analysis yet.</pre>
+      </section>
+    </main>
+  </body>
+</html>
